@@ -78,6 +78,7 @@ const mutations = {
       // protect ourselves by copying the information.
       article.favorited = data.favorited
       article.favoritesCount = data.favoritesCount
+      article.rating = 0
       return article
     })
   }

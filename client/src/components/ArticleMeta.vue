@@ -31,6 +31,9 @@
         <span class="counter">
           {{ article.favoritesCount }}
         </span>
+        <span class="rating">
+          {{ article.rating }}
+        </span>
       </button>
     </template>
   </div>

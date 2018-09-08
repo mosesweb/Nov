@@ -11,6 +11,7 @@ var UserSchema = new mongoose.Schema({
   image: String,
   favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Article' }],
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  ratings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Rating' }],
   hash: String,
   salt: String
 }, {timestamps: true, usePushEach: true});
@@ -61,6 +62,16 @@ UserSchema.methods.toProfileJSONFor = function(user){
 UserSchema.methods.favorite = function(id){
   if(this.favorites.indexOf(id) === -1){
     this.favorites.push(id);
+    this.ratings.push(id);
+  }
+
+  return this.save();
+};
+
+
+UserSchema.methods.rate = function(id){
+  if(this.ratings.indexOf(id) === -1){
+    this.ratings.push(id);
   }
 
   return this.save();

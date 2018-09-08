@@ -9,6 +9,7 @@ var ArticleSchema = new mongoose.Schema({
   description: String,
   body: String,
   favoritesCount: {type: Number, default: 0},
+  ratings:  [{ type: mongoose.Schema.Types.ObjectId, ref: 'Rating' }],
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
   tagList: [{ type: String }],
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
@@ -49,6 +50,7 @@ ArticleSchema.methods.toJSONFor = function(user){
     tagList: this.tagList,
     favorited: user ? user.isFavorite(this._id) : false,
     favoritesCount: this.favoritesCount,
+    rating: this.rating,
     author: this.author.toProfileJSONFor(user)
   };
 };
